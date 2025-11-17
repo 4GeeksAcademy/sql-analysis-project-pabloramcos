@@ -22,10 +22,10 @@ SELECT * FROM observations;
 
 
 -- MISSION 1
--- Your query here;
+SELECT * FROM observations LIMIT 10;
 
 -- MISSION 2
--- Your query here;
+SELECT DISTINCT region_id FROM regions;
 
 
 -- MISSION 3
