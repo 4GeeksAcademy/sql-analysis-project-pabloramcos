@@ -39,44 +39,24 @@ SELECT observer, COUNT(*) as total_observations FROM observations GROUP BY obser
 
 -- MISSION 3
 -- Your query here;
-SELECT region.name, observations.id FROM observations JOIN region ON observations.region_id = region.region_id;
+SELECT regions.name, observations.id FROM observations JOIN regions ON observations.region_id = regions.id;
+SELECT observations.id as identificador, species.scientific_name as nombre_cientifico, observations.observer as observador FROM species JOIN observations ON species.id = observations.species_id;
+
+SELECT observations.id as identificador, COUNT(observations.id) as cantidad_observaciones, species.scientific_name as nombre_cientifico, regions.name as nombre_region 
+FROM observations join species join regions on observations.species_id = species.id and observations.region_id = regions.id 
+GROUP BY nombre_region, nombre_cientifico ORDER BY cantidad_observaciones DESC;
 
 -- MISSION 4
 -- Your query here;
 
-Nivel 3 – Relaciones entre tablas (JOIN)
-Muestra el nombre de la región (regions.name) para cada observación.
-Relaciona observations con regions usando region_id.
+INSERT INTO observations (species_id, region_id, observer, observation_date, latitude, longitude, count) VALUES (35, 2, 'obsr1461807', '1998-01-15', -30.08333, 146.0833, 1);
+SELECT * FROM observations;
+DELETE FROM observations where observation_date = "1998-01-15" and species_id = 35 and region_id = 2;
+SELECT * FROM observations;
 
-Muestra el nombre científico de cada especie registrada (species.scientific_name).
-Relaciona observations con species usando species_id.
+UPDATE species
+SET scientific_name = "Struthidea cinereus"
+WHERE id = 222
 
-¿Cuál es la especie más observada por cada región?
-Agrupa por región y especie, y ordena por cantidad.
+DELETE FROM observations where id = 2;
 
-Nivel 4 (opcional) – Manipulación de datos
-Este bloque es opcional y solo si deseas practicar operaciones que modifican los datos. (INSERT, UPDATE, DELETE) Como analista, normalmente trabajarás con bases de solo lectura.
-
-Inserta una nueva observación ficticia en la tabla observations.
-Asegúrate de incluir todos los campos requeridos por el esquema.
-
-Corrige el nombre científico de una especie con error tipográfico.
-Busca primero el nombre incorrecto y luego actualízalo.
-
-Elimina una observación de prueba (usa su id).
-Asegúrate de no borrar datos importantes.
-
--- MISSION 5
--- Your query here;
-
-
--- MISSION 6
--- Your query here;
-
-
--- MISSION 7
--- Your query here;
-
-
--- MISSION 8
--- Your query here;
