@@ -48,15 +48,18 @@ GROUP BY nombre_region, nombre_cientifico ORDER BY cantidad_observaciones DESC;
 
 -- MISSION 4
 -- Your query here;
-
+START TRANSACTION;
+SAVEPOINT antes_CRUD;
 INSERT INTO observations (species_id, region_id, observer, observation_date, latitude, longitude, count) VALUES (35, 2, 'obsr1461807', '1998-01-15', -30.08333, 146.0833, 1);
-SELECT * FROM observations;
-DELETE FROM observations where observation_date = "1998-01-15" and species_id = 35 and region_id = 2;
-SELECT * FROM observations;
+SELECT * FROM observations ORDER BY id DESC LIMIT 5;
+--Al ser id autoincremental se genera automaticamente y a este insert le daria el ultimo id + 1
+--DELETE FROM observations where observation_date = "1998-01-15" and species_id = 35 and region_id = 2;
+--SELECT * FROM observations;
 
 UPDATE species
 SET scientific_name = "Struthidea cinereus"
 WHERE id = 222
 
 DELETE FROM observations where id = 2;
+ROLLBACK TO antes_CRUD;
 
